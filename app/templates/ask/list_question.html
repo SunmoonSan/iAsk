@@ -1,0 +1,58 @@
+{% extends "ask/base.html" %}
+{% import "ui/admin_page.html" as pg %}
+
+{% block content%}
+<div class="breadcrumbs">
+    <section class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>问题列表</h1>
+            </div>
+            <div class="col-md-12">
+                <div class="crumbs">
+                    <span class="current">问题列表</span>
+                </div>
+            </div>
+        </div><!-- End row -->
+    </section><!-- End container -->
+</div><!-- End breadcrumbs -->
+
+<section class="container main-content">
+    <div class="row">
+        <div class="col-md-9">
+            {% for item in qss.items%}
+            <a href="{{ url_for('ask.question_detail', question_id=item.id)}}">
+            <article class="question single-question question-type-normal">
+                <h2>{{ item.title }}</h2>
+                <div class="question-type-main"><i class="icon-question-sign"></i>问题</div>
+                <div class="question-inner font16">
+                    {{ item.content }}
+                </div>
+            </article>
+            </a>
+            {% endfor %}
+
+            <div class="text-center text-success">
+            {{ pg.page(qss,'ask.question_list') }}
+        </div>
+
+        </div>
+
+        {% if current_user.is_authenticated %}
+        <aside class="col-md-3 sidebar">
+            <div class="widget">
+                    <h3 class="widget_title">用户名：{{ current_user.username }}</h3>
+                    <a href="{{url_for("auth.logout_users")}}">
+                        <input type="button" value="退出登录" class="button color small">
+                    </a>
+            </div>
+        </aside>
+        {% endif %}
+    </div>
+
+</section>
+{% endblock %}
+
+{% block footer %}
+<script src="/static/js/questionlist.js"></script>
+{% endblock %}

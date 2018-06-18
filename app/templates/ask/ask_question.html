@@ -1,0 +1,69 @@
+{% extends "ask/base.html" %}
+{% block content %}
+<div class="breadcrumbs">
+    <section class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>提问</h1>
+            </div>
+        </div><!-- End row -->
+    </section><!-- End container -->
+</div><!-- End breadcrumbs -->
+
+
+
+<section class="container main-content">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="page-content ask-question">
+                <div class="boxedtitle page-title"><h2>提问</h2></div>
+
+                {% for msg in get_flashed_messages(category_filter=["ok"]) %}
+                    <div class="alert alert-success alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <h4><i class="icon fa fa-check"></i> 操作成功</h4>
+                        {{ msg }}
+                    </div>
+                {% endfor %}
+
+                <div class="form-style form-style-3" id="question-submit">
+                    <form>
+                        <div class="form-inputs clearfix">
+                            <p>
+                                <label class="required">问题标题<span>*</span></label>
+                                <input type="text" id="question-title">
+                                <span class="form-description">标题</span>
+                            </p>
+                        </div>
+                        <div id="form-textarea">
+                            <p>
+                                <label class="required">问题详细<span>*</span></label>
+                                <textarea id="question-details" aria-required="true" cols="58" rows="8"></textarea>
+                                <span class="form-description">问题的详细描述</span>
+                            </p>
+                        </div>
+                        <p class="form-submit">
+                            <input type="button" id="publish-question" value="提交问题" class="button color small submit">
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% if current_user.is_authenticated %}
+        <aside class="col-md-3 sidebar">
+            <div class="widget">
+                    <h3 class="widget_title">用户名：{{ current_user.username }}</h3>
+                    <a href="{{url_for("auth.logout_users")}}">
+                        <input type="button" value="退出登录" class="button color small">
+                    </a>
+            </div>
+        </aside>
+        {% endif %}
+    </div>
+</section>
+<div id="question-data" url="#{#{{ url_for('qa.question_info')}}#}"></div>
+{% endblock %}
+
+{% block footer %}
+<script src="/static/js/ask.js"></script>
+{% endblock %}

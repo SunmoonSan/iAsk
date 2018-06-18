@@ -1,0 +1,148 @@
+{% extends "ask/base.html" %}
+{% block content%}
+<div class="breadcrumbs">
+    <section class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>{{qs.title}}</h1>
+            </div>
+            <div class="col-md-12">
+                <div class="crumbs">
+                    <a href="#">问题</a>
+                    <span class="crumbs-span">/</span>
+                    <span class="current">{{qs.title}}</span>
+                </div>
+            </div>
+        </div><!-- End row -->
+    </section><!-- End container -->
+</div><!-- End breadcrumbs -->
+
+<section class="container main-content">
+    <div class="row">
+        <div class="col-md-9">
+            <article class="question single-question question-type-normal">
+                <h2>{{ qs.title }}</h2>
+                <div class="question-type-main"><i class="icon-question-sign"></i>问题</div>
+                <div class="question-inner">
+                    {{ qs.content }}
+                </div>
+            </article>
+            <div class="about-author clearfix">
+                    <!-- <div class="author-image"> -->
+                        <!-- <a href="#" original-title="admin" class="tooltip-n"><img alt="" src="http://placehold.it/60x60/FFF/444"></a> -->
+                    <!-- </div> -->
+                <div class="author-bio">
+                    <h4>作者:</h4>
+                    <p>{{ qs.author.username }}</p>
+                </div><!-- End about-author -->
+            </div>
+            <div id="commentlist" class="page-content">
+                <div class="boxedtitle page-title"><h2>答案 ( <span class="color">{{qs.answers_count}}</span> )</h2></div>
+                <ol class="commentlist clearfix">
+                    {% for ans in qs.answers%}
+                         <li class="comment">
+                               <div class="comment-body comment-body-answered clearfix">
+                                    <div class="avatar"><img alt="" src="http://placehold.it/60x60/FFF/444"></div>
+                                    <div class="comment-text">
+                                        <div class="author clearfix">
+                                            <div class="comment-author"><a href="#">{{ ans.author.username }}</a></div>
+                                            <div class="comment-meta">
+                                                <div class="date"><i class="icon-time"></i> {{ans.create_time}}</div>
+                                            </div>
+                                            <a class="comment-reply" href="#respond" ans-id="{{ ans.id }}" id="reply-answer"><i class="icon-reply"></i>回复</a>
+                                        </div>
+                                        <div class="text">
+                                            <p> {{ ans.content }}</p>
+                                        </div>
+                                    </div>
+                               </div>
+                               <ul class="children">
+                                   {% for cm in ans.comments%}
+                                    <li class="comment">
+                                        <div class="comment-body comment-body-answered clearfix">
+                                            <div class="avatar"><img alt="" src="http://placehold.it/60x60/FFF/444"></div>
+                                            <div class="comment-text">
+                                                <div class="author clearfix">
+                                                    <div class="comment-author"><a href="#">{{ cm.author.username }}</a></div>
+                                                    <div class="comment-meta">
+                                                        <div class="date"><i class="icon-time"></i> {{cm.create_time}}</div>
+                                                    </div>
+                                                </div>
+                                                <div class="text">
+                                                    <p> {{ cm.content }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    {% endfor %}
+                               </ul>
+                         </li>
+                    {% endfor %}
+                </ol>
+            </div>
+            <div id="respond" class="comment-respond page-content clearfix">
+                <div class="boxedtitle page-title"><h2>提交回复</h2></div>
+                <div id="reply-info" rtype="1" rid="" qs-url="{{url_for('ask.question_answer', question_id=qs.id)}}"></div>
+                    <form action="" method="post" id="commentform" class="comment-form">
+                        <div id="respond-textarea">
+                            <p>
+                                <label class="required" for="comment">回复<span>*</span></label>
+                                <textarea id="comment" name="comment" aria-required="true" cols="58" rows="8"></textarea>
+                            </p>
+                        </div>
+                        <p class="form-submit">
+                            <input name="submit" type="button" id="submit" value="提交" class="button small color">
+                        </p>
+                    </form>
+                </div>
+            </div>
+        {% if current_user.is_authenticated %}
+        <aside class="col-md-3 sidebar">
+            <div class="widget">
+                    <h3 class="widget_title">用户名：{{ current_user.username }}</h3>
+                    <a href="{{url_for("auth.logout_users")}}">
+                        <input type="button" value="退出登录" class="button color small">
+                    </a>
+            </div>
+        </aside>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
+{% block js %}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#nav-question").addClass("current_page_item");
+
+        $("#submit").click(function(){
+            let url = $("#reply-info").attr("qs-url");
+            let content = $("#comment").val();
+            let rid = $("#reply-info").attr("rid");
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {
+                    'content': content,
+                    'rid': rid
+                },
+                success: function (json) {
+                    if (json.status === 'success') {
+                        window.location.reload()
+                    }
+                }
+            });
+        });
+
+        $("[id=reply-answer]").click(function(){
+            $("#reply-info").attr("qs-url", "{{url_for('ask.question_comment', question_id=qs.id)}}");
+            $("#reply-info").attr("rtype", "2");
+            $("#reply-info").attr("rid", $(this).attr("ans-id"));
+            console.log($("#reply-info").attr("rid"));
+        });
+
+    });
+</script>
+{% endblock %}
+{% block footer %}
+{#<script src="/static/js/questions.js"></script>#}
+{% endblock %}

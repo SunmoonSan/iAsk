@@ -1,0 +1,101 @@
+/*
+Theme Name: Ask me
+Theme URI: www.2code.info
+Author: 2code
+Author URI: www.2code.info
+design by: 2code
+url: www.2code.info
+*/
+body,#warp,.loader,.boxed,.boxed2,.widget_tag_cloud a {
+	background-color: #2f3239;
+}
+#footer,.question,.widget,.page-content,.about-author,.user-question,#related-posts,.pagination span,.share-inside-warp,.post,blockquote .button.color:hover,.qoute .button.color:hover,.testimonial-warp-2,.testimonial {
+	background-color: #222429;
+}
+.question-report,.widget_login input[type="text"],.widget_login input[type="password"],.widget.widget_stats li,.user-profile-widget .ul_list li,.pagination a,.share-inside-warp,.single-question-vote-up,.single-question-vote-down,.button.black, .button.dark_button.color,.button.color:hover,.progressbar,blockquote,.qoute,.accordion .accordion-title a,.carousel-pagination a,.user-stats-head,.stats-head, .block-stats-1, .block-stats-2, .block-stats-3, .block-stats-4,.user-stats-item {
+	background-color: #393c44;
+}
+.widget_login input[type="text"],.widget_login input[type="password"],input[type="text"],input[type="password"],input[type="email"],textarea,select,.fakefile button,#question-submit input[type="checkbox"],input[type="radio"] {
+	border-color: #393c44;
+	background-color: #393c44;
+}
+.question,.widget,.page-content,.about-author,.user-question,#related-posts,.panel-pop,.share-inside-warp,.post {
+	border-color: rgba(0,0,0,0.10);
+	-moz-box-shadow: 0 0 5px rgba(0,0,0,0.10);
+	-webkit-box-shadow: 0 0 5px rgba(0,0,0,0.10);
+	box-shadow: 0 0 5px rgba(0,0,0,0.10);
+}
+.carousel-pagination a.selected {
+	background-color: #FFF;
+}
+.share-inside-f-arrow:before {
+	color: rgba(0,0,0,0.10);
+}
+.share-inside-l-arrow:before {
+	color: #393c44;
+}
+.testimonial-l-arrow,.testimonial-f-arrow {
+	border-top-color: #2a2d32;
+}
+.widget_tag_cloud a,.question-author,.author-img,.commentlist li .avatar,.author-image,.progressbar,.testimonial-client img {
+	border-color: #2f3239;
+}
+.question-desc,.widget h3.widget_title,.main-content .page-content .boxedtitle.page-title h2,.panel-pop h2, .login h2, .contact-us h2, #related-posts h2, .user-profile h2,.user-question,.comment,.post-title,.widget_menu li a,.divider {
+	border-bottom-color: #43464b;
+}
+.commentlist .comment:last-child {
+	border-bottom: none;
+}
+.children .comment {
+	border-top-color: #43464b;
+}
+.panel-pop,.user-profile-img,.testimonial-client img {
+	background-color: #212429;
+}
+.user-profile-img {
+	border-color: #2a2d32;
+}
+.stats-head,.user-stats-item div {
+	border-right-color: #43464b;
+}
+.user-stats-head,.user-stats-item {
+	border-bottom-color: #43464b;
+}
+.user-stats {
+	border-color: #43464b;
+}
+.user-question {
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+body,.question-desc,ul.login-links a,.widget_highest_points .comment,.related-item p,.user-profile p,.contact-us p,.form-style p span,.post-content,#question-submit input[type="checkbox"]:checked::before,.icon_shortcode .ul_icons li i {
+	color: #CCC;
+}
+input[type="radio"]:checked::before {
+	background: #CCC;
+}
+.commentlist li .date,.commentlist li .date i {
+	color: #949597;
+}
+.commentlist li p {
+	color: #d6d6d8;
+}
+.related-item span {
+	color: #777;
+}
+p a:hover,.question h2 a,.question-date,.question-view,.question-favorite,.question-reply,.question-category a,.question-comment a,.question-date i,.question-view i,.question-comment i,.question-category i,.question-reply i,.widget_login input[type="text"],.widget_login input[type="password"],.related-posts li a,.widget.widget_stats li,.user-profile-widget .ul_list li,.question-tab .tab a,.question-tab .tab a:hover,.form-style label,.user-profile-widget li, .user-profile-widget li a,.ul_list li,.about-user span,.user-follow-me,.user-question .question-favorite i,.pagination a,.pagination span,.widget_contact ul li,.widget_contact ul li p,#respond label,.comment-author a,.commentlist li .author span,.question-tags a:hover,.post-tags a:hover,.share-inside-warp ul li a,.question-vote-result,.single-question-vote-result,.single-question-vote-up,.single-question-vote-down,#related-posts li i,.related-posts li i,.about-author .author-bio,.single-question .question-desc,blockquote,.qoute,.post,.post .post-meta .meta-author a,.post .post-meta .meta-date,.post .post-meta .meta-categories a,.post .post-meta .meta-comment a,.post .post-meta .meta-author i,.post .post-meta .meta-date i,.post .post-meta .meta-categories i,.post .post-meta .meta-comment i,.progressbar-title,#columns p,.widget_menu li a,.accordion .accordion-inner,.testimonial-client span span,.testimonial-warp-2,.testimonial,.dropcap,.box_icon p,.ul_list_default ul li,.ul_list_default ol li,.user-stats-item div {
+	color: #FFF;
+}
+.user-question h3 a:hover,.user-points .question-user-vote,.user-points .question-vote-result,.question-vote-up,.comment-vote-up,.question-vote-down,.comment-vote-down,.comment-reply:hover,.post-title a:hover,.block-stats-1 {
+	color: #FFF !important;
+}
+.question .question-answered-done,.user-question .question-answered-done i,.question-answered-done {
+	color: #9acccd;
+}
+.question-favorite,.user-question .question-favorite i {
+	color: #dfaa63;
+}
