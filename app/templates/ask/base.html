@@ -1,10 +1,165 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hans">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>i-Ask</title>
+    <meta name="author" content="San">
+
+    <!-- 移动 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- Main Style -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <!-- Skins -->
+    <link rel="stylesheet" href="/static/css/skins/blue.css">
+    <!-- Responsive Style -->
+    <link rel="stylesheet" href="/static/css/responsive.css">
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="/static/images/favicon.ico">
+
+{#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">#}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
 </head>
 <body>
+<div class="loader"><div class="loader_html"></div></div>
 
+<div id="wrap" class="grid_1200">
+
+    {% if not current_user.is_authenticated %}
+    <div class="login-panel">
+        <section class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="page-content">
+                        <h2>登陆</h2>
+                        <div class="form-style form-style-3">
+                            <form method="post" action="{{url_for('auth.login_users')}}">
+                                <div class="form-inputs clearfix">
+                                    <p class="login-text">
+                                        <input type="text" name="username" value="Username" onfocus="if (this.value == 'Username') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Username';}">
+                                        <i class="icon-user"></i>
+                                    </p>
+                                    <p class="login-password">
+                                        <input type="password" name="password" value="Password" onfocus="if (this.value == 'Password') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Password';}">
+                                        <i class="icon-lock"></i>
+                                        <!-- <a href="#">Forget</a> -->
+                                    </p>
+                                </div>
+                                <p class="form-submit login-submit">
+                                    <input type="submit" value="Log in" class="button color small login-submit submit">
+                                </p>
+                                <!--
+                                <div class="rememberme">
+                                    <label><input type="checkbox" checked="checked"> Remember Me</label>
+                                </div> -->
+                            </form>
+                        </div>
+                    </div><!-- End page-content -->
+                </div><!-- End col-md-6 -->
+                <div class="col-md-6">
+                    <div class="page-content Register">
+                        <h2>注册</h2>
+                        <p>注册</p>
+                        <a class="button color small signup">注册</a>
+                    </div><!-- End page-content -->
+                </div><!-- End col-md-6 -->
+            </div>
+        </section>
+    </div><!-- End login-panel -->
+    {% endif %}
+
+
+    {% if not current_user.is_authenticated %}
+    <div id="header-top">
+        <section class="container clearfix">
+            <nav class="header-top-nav">
+                <ul>
+                    <li><a href="login.html" id="login-panel"><i class="icon-user"></i>登陆</a></li>
+                </ul>
+            </nav>
+            <!-- <div class="header-search">
+                <form>
+                    <input type="text" value="Search here ..." onfocus="if(this.value=='Search here ...')this.value='';" onblur="if(this.value=='')this.value='Search here ...';">
+                    <button type="submit" class="search-submit"></button>
+                </form>
+            </div>-->
+        </section><!-- End container -->
+    </div><!-- End header-top -->
+    {% endif %}
+    <header id="header">
+        <section class="container clearfix">
+            <div class="logo"><a href="{{ url_for('ask.index') }}"><img alt="" src="/static/images/logo75.png"></a></div>
+            <nav class="navigation">
+                <ul>
+                    <li id="nav-index"><a href="{{ url_for('ask.index') }}">首页</a>
+                        <!-- <ul>
+                            <li class="current_page_item"><a href="index.html"></a></li>
+                        </ul> -->
+                    </li>
+
+                    <li id="nav-ask"><a href="{{ url_for('ask.question_add') }}">提问</a></li>
+
+                    <li id="nav-question"><a href="{{ url_for('ask.question_list', page=0)}}">问题</a></li>
+                </ul>
+            </nav>
+        </section><!-- End container -->
+    </header><!-- End header -->
+    {% block content %} {% endblock %}
+
+
+{% if not current_user.is_authenticated %}
+<div class="panel-pop" id="signup">
+    <h2>注册<i class="icon-remove"></i></h2>
+    <div class="form-style form-style-3">
+        <form>
+            <div class="form-inputs clearfix">
+                <p>
+                    <label class="required">用户名<span>*</span></label>
+                    <input type="text" name="username" id="username">
+                </p>
+                <p>
+                    <label class="required">邮箱<span>*</span></label>
+                    <input type="email" name="email" id="email">
+                </p>
+                <p>
+                    <label class="required">密码<span>*</span></label>
+                    <input type="password" name="password" value="" id="password">
+                </p>
+            </div>
+            <p class="form-submit">
+                <input type="button" value="Signup" class="button color small submit" id="submit-button">
+            </p>
+        </form>
+    </div>
+</div><!-- End signup -->
+<div id="signup-data" url="{{ url_for('auth.signup_user')}}"></div>
+{% endif %}
+
+<!-- js -->
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/jquery-ui-1.10.3.custom.min.js"></script>
+<script src="/static/js/jquery.easing.1.3.min.js"></script>
+<script src="/static/js/html5.js"></script>
+<script src="/static/js/twitter/jquery.tweet.js"></script>
+<script src="/static/js/jflickrfeed.min.js"></script>
+<script src="/static/js/jquery.inview.min.js"></script>
+<script src="/static/js/jquery.tipsy.js"></script>
+<script src="/static/js/tabs.js"></script>
+<script src="/static/js/jquery.flexslider.js"></script>
+<script src="/static/js/jquery.prettyPhoto.js"></script>
+<script src="/static/js/jquery.carouFredSel-6.2.1-packed.js"></script>
+<script src="/static/js/jquery.scrollTo.js"></script>
+<script src="/static/js/jquery.nav.js"></script>
+<script src="/static/js/tags.js"></script>
+<script src="/static/js/jquery.bxslider.min.js"></script>
+<script src="/static/js/custom.js"></script>
+
+{% block js %}
+{% endblock %}
+{% block footer %}
+{% endblock %}
+<!-- End js -->
+
+</div>
 </body>
 </html>

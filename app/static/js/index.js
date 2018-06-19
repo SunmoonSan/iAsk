@@ -3,7 +3,6 @@ $(document).ready(function() {
 
     $("#submit-button").click(function(){
         var username = $("#username").val();
-        alert('username'+username);
         var email = $("#email").val();
         var password = $("#password").val();
         var post_url = $("#signup-data").attr("url");
@@ -17,9 +16,8 @@ $(document).ready(function() {
             },
             success: function (e) {
                 if (e.status === 'success') {
-                   $(".panel-pop h2 i").trigger("click");
+                    $(".panel-pop h2 i").trigger("click");
                 }
-                alert(e.info)
             }
         });
         // $.post(post_url, {"username": username, "email": email, "password": password}, function(data){

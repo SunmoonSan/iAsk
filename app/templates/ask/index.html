@@ -1,10 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends "ask/base.html" %}
+{% block content %}
+    <div class="section-warp ask-me">
+        <div class="container clearfix">
+            <div class="box_icon box_warp box_no_border box_no_background" box_border="transparent" box_background="transparent" box_color="#FFF">
+                <div class="row">
+                    <div class="col-md-3">
+                        <h2> i-Ask </h2>
+                        <!--
+                        <p>Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis. Curabitur vitae velit in neque dictum blandit. Proin in iaculis neque.</p>
+                        <div class="clearfix"></div>
+                        <a class="color button dark_button medium" href="#">About Us</a>
+                        <a class="color button dark_button medium" href="#">Join Now</a>-->
+                    </div>
+                    <div class="col-md-9">
+                        <form class="form-style form-style-2">
+                            <p>
+                                <textarea rows="4" id="question_title" onfocus="if(this.value=='')this.value='!!!';" onblur="if(this.value=='')this.value='!!!';">!!!</textarea>
+                                <i class="icon-pencil"></i>
+                                <span class="color button small publish-question">提交问题</span>
+                            </p>
+                        </form>
+                    </div>
+                </div><!-- End row -->
+            </div><!-- End box_icon -->
+        </div><!-- End container -->
+    </div><!-- End section-warp -->
+</div>
+
+{% if current_user.is_authenticated %}
+<section class="container main-content">
+    <div class="row">
+        <div class="col-md-9">
+        </div>
+        <aside class="col-md-3 sidebar">
+            <div class="widget">
+                    <h3 class="widget_title">用户名：{{ current_user.username }}</h3>
+                    <a href="{{url_for("auth.logout_users")}}">
+                        <input type="button" value="退出登录" class="button color small">
+                    </a>
+            </div>
+        </aside>
+    </div>
+</section>
+{% endif %}
+{% endblock %}
+
+{% block footer %}
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
+{% endblock %}
